@@ -58,5 +58,3 @@ For the best Kitty mode experience, reduce your terminal font size for higher re
 - [nalgebra](https://nalgebra.org/) — linear algebra, quaternions, projections
 - [gilrs](https://gitlab.com/gilrs-project/gilrs) — gamepad/joystick input
 - [base64](https://docs.rs/base64/) — Kitty graphics protocol encoding
-- [rayon](https://docs.rs/rayon/) — parallelism (available for future use)
-- [flate2](https://docs.rs/flate2/) — zlib compression (available for future use)
