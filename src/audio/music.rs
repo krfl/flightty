@@ -1,11 +1,19 @@
+use rand::Rng;
 use rodio::{Decoder, OutputStream, OutputStreamHandle, Sink};
 use std::io::BufReader;
+
+const TRACKS: [&[u8]; 3] = [
+    include_bytes!("../../assets/music/01.mp3"),
+    include_bytes!("../../assets/music/02.mp3"),
+    include_bytes!("../../assets/music/03.mp3"),
+];
 
 pub struct SoundManager {
     _stream: OutputStream,
     _handle: OutputStreamHandle,
     music_sink: Sink,
     playing: bool,
+    start_index: usize,
 }
 
 #[derive(Clone, Copy, PartialEq)]
@@ -21,11 +29,13 @@ impl SoundManager {
         let (stream, handle) = OutputStream::try_default().ok()?;
         let sink = Sink::try_new(&handle).ok()?;
         sink.set_volume(0.3);
+        let start_index = rand::rng().random_range(0..TRACKS.len());
         Some(Self {
             _stream: stream,
             _handle: handle,
             music_sink: sink,
             playing: false,
+            start_index,
         })
     }
 
@@ -52,14 +62,10 @@ impl SoundManager {
     }
 
     fn append_playlist(&self) {
-        let tracks = [
-            include_bytes!("../../assets/music/01.mp3").as_slice(),
-            include_bytes!("../../assets/music/02.mp3").as_slice(),
-            include_bytes!("../../assets/music/03.mp3").as_slice(),
-        ];
-
-        for data in &tracks {
-            let cursor = std::io::Cursor::new(*data);
+        // Play all tracks starting from the random start index, wrapping around
+        for i in 0..TRACKS.len() {
+            let idx = (self.start_index + i) % TRACKS.len();
+            let cursor = std::io::Cursor::new(TRACKS[idx]);
             let reader = BufReader::new(cursor);
             if let Ok(source) = Decoder::new(reader) {
                 self.music_sink.append(source);
