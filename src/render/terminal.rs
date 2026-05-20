@@ -69,7 +69,7 @@ impl Widget for FpvView<'_> {
 }
 
 /// Render framebuffer via Kitty Graphics Protocol directly to stdout.
-/// Bypasses ratatui — writes escape sequences directly.
+/// Bypasses ratatui by writing escape sequences directly.
 /// Delete all kitty graphics images (call when leaving kitty mode or exiting).
 pub fn cleanup_kitty() -> io::Result<()> {
     let mut stdout = io::stdout().lock();
@@ -139,7 +139,7 @@ pub fn render_kitty_frame(
         out.extend_from_slice(b"\x1b\\");
     }
 
-    // Step 2: Place new image — atomically replaces the old placement
+    // Step 2: Place new image, atomically replacing the old placement
     write!(
         out,
         "\x1b_Ga=p,i={},p=1,c={},r={},q=2,C=1\x1b\\",

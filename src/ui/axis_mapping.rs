@@ -72,7 +72,7 @@ pub fn render_axis_mapping(
         font::draw_string(fb, &text, (w - text_px) / 2, y, color, bg, scale);
     }
 
-    // Live axis monitor — shows all active axes in real time
+    // Live axis monitor: shows all active axes in real time
     if let Some(gp) = gamepad_ref {
         let monitor_y = start_y + 4 * line_h + line_h;
         let monitor_label = "LIVE AXES:";

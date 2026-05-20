@@ -27,7 +27,7 @@ fn main() -> io::Result<()> {
     execute!(stdout, EnterAlternateScreen, EnableMouseCapture)?;
 
     // Try to enable keyboard enhancement for key release events.
-    // Not all terminals support this — fall back gracefully.
+    // Not all terminals support this, so fall back gracefully.
     let keyboard_enhanced = execute!(
         stdout,
         PushKeyboardEnhancementFlags(KeyboardEnhancementFlags::REPORT_EVENT_TYPES)

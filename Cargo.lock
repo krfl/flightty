@@ -538,6 +538,19 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0ce7134b9999ecaf8bcd65542e436736ef32ddca1b3e06094cb6ec5755203b80"
 
 [[package]]
+name = "flightty"
+version = "0.1.0"
+dependencies = [
+ "base64",
+ "crossterm",
+ "gilrs",
+ "nalgebra",
+ "rand 0.9.4",
+ "ratatui",
+ "rodio",
+]
+
+[[package]]
 name = "fnv"
 version = "1.0.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -554,19 +567,6 @@ name = "foldhash"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "77ce24cb58228fbb8aa041425bb1050850ac19177686ea6e0f41a70416f56fdb"
-
-[[package]]
-name = "fpv"
-version = "0.1.0"
-dependencies = [
- "base64",
- "crossterm",
- "gilrs",
- "nalgebra",
- "rand 0.9.4",
- "ratatui",
- "rodio",
-]
 
 [[package]]
 name = "futures-core"

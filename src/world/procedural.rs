@@ -75,7 +75,7 @@ pub fn random_course() -> Scene {
     // Ground plane
     meshes.push(primitives::ground_plane(200.0, 50));
 
-    // Central landmark — always present, helps with orientation
+    // Central landmark, always present to help with orientation
     generate_landmark(&mut rng, &pal, &mut meshes, &mut placed);
 
     // Gate circuit with sequences and height variation
@@ -167,7 +167,7 @@ fn generate_landmark(rng: &mut impl Rng, pal: &Palette, meshes: &mut Vec<Mesh>, 
             meshes.extend(primitives::gate(Point3::new(cx + 3.0, 0.0, cz), 90.0, 3.5, 4.5, pal.secondary));
         }
         _ => {
-            // Four pillars with high bridge — fly under or over
+            // Four pillars with high bridge; fly under or over
             let h = rng.random_range(10.0..15.0);
             for &(dx, dz) in &[(-4.0, -4.0), (4.0, -4.0), (-4.0, 4.0), (4.0, 4.0)] {
                 meshes.push(primitives::pillar(Point3::new(cx + dx, 0.0, cz + dz), 0.6, h, pal.primary));
@@ -282,7 +282,7 @@ fn generate_gate_circuit(
 fn generate_cluster(rng: &mut impl Rng, pal: &Palette, cx: f32, cz: f32, meshes: &mut Vec<Mesh>) {
     match rng.random_range(0..13) {
         0 => {
-            // Pillar forest — weaving territory
+            // Pillar forest: weaving territory
             let n = rng.random_range(4..=7);
             for _ in 0..n {
                 let x = cx + rng.random_range(-6.0..6.0f32);
@@ -293,7 +293,7 @@ fn generate_cluster(rng: &mut impl Rng, pal: &Palette, cx: f32, cz: f32, meshes:
             }
         }
         1 => {
-            // Multi-level bando — gates at different heights on different sides
+            // Multi-level bando with gates at different heights on different sides
             let rot = rng.random_range(0.0..180.0f32);
             meshes.push(primitives::cube(Point3::new(cx, 3.0, cz), 6.0, pal.structure));
             meshes.push(primitives::cube(Point3::new(cx, 9.0, cz), 6.0, pal.dark));
@@ -305,7 +305,7 @@ fn generate_cluster(rng: &mut impl Rng, pal: &Palette, cx: f32, cz: f32, meshes:
             meshes.extend(primitives::gate(Point3::new(cx + 3.0, 2.5, cz), rot + 90.0, 3.0, 3.0, pal.secondary));
         }
         2 => {
-            // Twin towers with bridge — split-S territory
+            // Twin towers with bridge: split-S territory
             let color = pal.pick(rng);
             let h = rng.random_range(8.0..16.0);
             let gap = rng.random_range(4.0..7.0);
@@ -315,7 +315,7 @@ fn generate_cluster(rng: &mut impl Rng, pal: &Palette, cx: f32, cz: f32, meshes:
             meshes.extend(primitives::gate(Point3::new(cx, 0.0, cz), 0.0, gap * 1.5, 3.0, pal.accent));
         }
         4 => {
-            // Ramp pair — matty flip playground
+            // Ramp pair: matty flip playground
             let color = pal.pick(rng);
             let rot = rng.random_range(0.0..360.0f32);
             meshes.push(primitives::ramp(Point3::new(cx - 4.0, 0.0, cz), rot, 5.0, 7.0, 4.0, color));
@@ -323,7 +323,7 @@ fn generate_cluster(rng: &mut impl Rng, pal: &Palette, cx: f32, cz: f32, meshes:
             meshes.extend(primitives::gate(Point3::new(cx, 0.0, cz), rot + 90.0, 3.0, 3.0, pal.accent));
         }
         5 => {
-            // Archway row — power loop targets
+            // Archway row: power loop targets
             let rot = rng.random_range(0.0..180.0f32);
             let count = rng.random_range(2..=4);
             let sin_r = rot.to_radians().sin();
@@ -343,7 +343,7 @@ fn generate_cluster(rng: &mut impl Rng, pal: &Palette, cx: f32, cz: f32, meshes:
             }
         }
         6 => {
-            // Stacked gates — two heights at same position
+            // Stacked gates: two heights at same position
             let rot = rng.random_range(0.0..360.0f32);
             // Low gate
             meshes.extend(primitives::gate(Point3::new(cx, 0.0, cz), rot, 3.5, 2.5, pal.primary));
@@ -358,7 +358,7 @@ fn generate_cluster(rng: &mut impl Rng, pal: &Palette, cx: f32, cz: f32, meshes:
             meshes.push(primitives::pillar(Point3::new(cx + cos_r * hw, 0.0, cz - sin_r * hw), 0.2, high_y, pal.structure));
         }
         7 => {
-            // Cube canyon — two tall cubes with a flyable gap between them
+            // Cube canyon: two tall cubes with a flyable gap between them
             let h = rng.random_range(6.0..12.0);
             let gap = rng.random_range(3.0..5.0);
             let size = rng.random_range(4.0..6.0);
@@ -367,7 +367,7 @@ fn generate_cluster(rng: &mut impl Rng, pal: &Palette, cx: f32, cz: f32, meshes:
             meshes.extend(primitives::gate(Point3::new(cx, 0.0, cz), 90.0, gap, h - 1.0, pal.accent));
         }
         8 => {
-            // Cube bridge — two tall cubes with a cube spanning the top
+            // Cube bridge: two tall cubes with a cube spanning the top
             let h = rng.random_range(6.0..10.0);
             let gap = rng.random_range(4.0..6.0);
             let pillar_size = rng.random_range(3.0..4.0);
@@ -380,7 +380,7 @@ fn generate_cluster(rng: &mut impl Rng, pal: &Palette, cx: f32, cz: f32, meshes:
             meshes.extend(primitives::gate(Point3::new(cx, 0.0, cz), 90.0, gap, h - 0.5, pal.accent));
         }
         9 => {
-            // Pillar ring — circle of pillars to weave through
+            // Pillar ring: circle of pillars to weave through
             let count = rng.random_range(6..=8);
             let radius = rng.random_range(5.0..8.0);
             let h = rng.random_range(5.0..10.0);
@@ -395,13 +395,13 @@ fn generate_cluster(rng: &mut impl Rng, pal: &Palette, cx: f32, cz: f32, meshes:
             meshes.extend(primitives::gate(Point3::new(cx, 0.0, cz), rng.random_range(0.0..360.0f32), 3.5, 3.0, pal.accent));
         }
         10 => {
-            // Pyramid — stack of 3 decreasing cubes
+            // Pyramid: stack of 3 decreasing cubes
             meshes.push(primitives::cube(Point3::new(cx, 2.5, cz), 5.0, pal.structure));
             meshes.push(primitives::cube(Point3::new(cx, 6.5, cz), 3.5, pal.dark));
             meshes.push(primitives::cube(Point3::new(cx, 9.5, cz), 2.0, pal.primary));
         }
         11 => {
-            // Elevated platform — cube on 4 pillar legs, fly underneath
+            // Elevated platform: cube on 4 pillar legs, fly underneath
             let h = rng.random_range(4.0..7.0);
             let platform_size = rng.random_range(5.0..8.0);
             let half = platform_size / 2.0 - 0.5;
@@ -415,7 +415,7 @@ fn generate_cluster(rng: &mut impl Rng, pal: &Palette, cx: f32, cz: f32, meshes:
             meshes.push(primitives::cube(Point3::new(cx, h + 1.0, cz), platform_size, pal.secondary));
         }
         _ => {
-            // Pillar slalom — tight alternating left-right pillars
+            // Pillar slalom: tight alternating left-right pillars
             let count = rng.random_range(4..=6);
             let spacing = rng.random_range(4.0..6.0);
             let offset = rng.random_range(2.0..3.5);
@@ -435,7 +435,7 @@ fn generate_cluster(rng: &mut impl Rng, pal: &Palette, cx: f32, cz: f32, meshes:
 fn generate_scattered(rng: &mut impl Rng, pal: &Palette, x: f32, z: f32, meshes: &mut Vec<Mesh>) {
     match rng.random_range(0..7) {
         0 => {
-            // Tall pillar — power loop target
+            // Tall pillar: power loop target
             let h = rng.random_range(5.0..14.0);
             meshes.push(primitives::pillar(Point3::new(x, 0.0, z), rng.random_range(0.3..0.8), h, pal.pick(rng)));
         }
@@ -450,7 +450,7 @@ fn generate_scattered(rng: &mut impl Rng, pal: &Palette, x: f32, z: f32, meshes:
             meshes.extend(primitives::gate(Point3::new(x, 0.0, z), rot, rng.random_range(2.5..4.0), rng.random_range(2.0..3.5), pal.pick(rng)));
         }
         3 => {
-            // Elevated gate — dive target
+            // Elevated gate: dive target
             let h = rng.random_range(4.0..8.0);
             let rot = rng.random_range(0.0..360.0f32);
             meshes.extend(primitives::gate(Point3::new(x, h, z), rot, 3.0, 2.5, pal.accent));
@@ -461,7 +461,7 @@ fn generate_scattered(rng: &mut impl Rng, pal: &Palette, x: f32, z: f32, meshes:
             meshes.push(primitives::pillar(Point3::new(x + cos_r * hw, 0.0, z - sin_r * hw), 0.15, h, pal.structure));
         }
         5 => {
-            // Split cube — two cubes with a vertical gap + gate
+            // Split cube: two cubes with a vertical gap + gate
             let h = rng.random_range(4.0..8.0);
             let gap = rng.random_range(3.0..4.5);
             let size = rng.random_range(3.0..5.0);
@@ -470,7 +470,7 @@ fn generate_scattered(rng: &mut impl Rng, pal: &Palette, x: f32, z: f32, meshes:
             meshes.extend(primitives::gate(Point3::new(x, 0.0, z), 90.0, gap, h - 0.5, pal.accent));
         }
         _ => {
-            // Archway — single power loop target
+            // Archway: single power loop target
             let h = rng.random_range(6.0..10.0);
             let rot = rng.random_range(0.0..360.0f32);
             let sin_r = rot.to_radians().sin();

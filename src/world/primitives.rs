@@ -192,7 +192,7 @@ pub fn wall(position: Point3<f32>, rotation_y_deg: f32, width: f32, height: f32,
     Mesh::new(vertices, indices).with_transform(transform)
 }
 
-/// Generate a ramp for proximity flying (no collision — AABB can't represent slopes).
+/// Generate a ramp for proximity flying (no collision, since AABB can't represent slopes).
 pub fn ramp(position: Point3<f32>, rotation_y_deg: f32, width: f32, length: f32, height: f32, color: Color) -> Mesh {
     let hw = width / 2.0;
     let hl = length / 2.0;

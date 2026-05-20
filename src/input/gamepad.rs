@@ -35,7 +35,7 @@ impl Default for AxisMapping {
 fn config_path() -> PathBuf {
     let mut path = dirs_home().unwrap_or_else(|| PathBuf::from("."));
     path.push(".config");
-    path.push("fpv");
+    path.push("flightty");
     path
 }
 
@@ -190,7 +190,7 @@ impl GamepadInput {
     }
 
     fn read_axis(&self, assignment: &AxisAssignment) -> f32 {
-        // Read from live_axes (populated by events) — works for all axes including Unknown
+        // Read from live_axes (populated by events). Works for all axes including Unknown.
         let val = self.live_axes.get(&assignment.axis).copied().unwrap_or(0.0);
         if assignment.inverted { -val } else { val }
     }

@@ -55,7 +55,7 @@ impl SoundManager {
             self.playing = true;
         }
 
-        // If sink is empty, the playlist finished — restart it
+        // If sink is empty, the playlist finished. Restart it.
         if self.music_sink.empty() {
             self.append_playlist();
         }

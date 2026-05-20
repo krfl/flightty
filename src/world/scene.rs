@@ -12,7 +12,7 @@ pub struct Scene {
     pub spawn_orientation: UnitQuaternion<f32>,
 }
 
-/// Freestyle FPV playground — structures to rip, gap, dive, and power loop.
+/// Freestyle FPV playground with structures to rip, gap, dive, and power loop.
 pub fn test_course() -> Scene {
     let mut meshes = Vec::new();
 
@@ -32,12 +32,12 @@ pub fn test_course() -> Scene {
     let dark_gray = Color::new(70, 70, 70);
 
     // === POWER LOOP PILLARS (right in front of spawn) ===
-    // Three pillars in a row — power loop around them
+    // Three pillars in a row; power loop around them
     meshes.push(primitives::pillar(Point3::new(-4.0, 0.0, -12.0), 0.5, 8.0, red));
     meshes.push(primitives::pillar(Point3::new( 0.0, 0.0, -12.0), 0.5, 10.0, orange));
     meshes.push(primitives::pillar(Point3::new( 4.0, 0.0, -12.0), 0.5, 8.0, red));
 
-    // === DIVE GAP — wall on pillars with a gap at the bottom ===
+    // === DIVE GAP: wall on pillars with a gap at the bottom ===
     meshes.push(primitives::wall(Point3::new(0.0, 3.0, -24.0), 0.0, 12.0, 6.0, 0.3, blue));
     // Support pillars for the wall
     meshes.push(primitives::pillar(Point3::new(-5.5, 0.0, -24.0), 0.3, 3.0, blue));
@@ -45,30 +45,30 @@ pub fn test_course() -> Scene {
     // Gate at the bottom to fly through
     meshes.extend(primitives::gate(Point3::new(0.0, 0.0, -24.0), 0.0, 3.0, 2.5, cyan));
 
-    // === FREESTYLE BUILDING — stack of cubes to orbit and thread ===
+    // === FREESTYLE BUILDING: stack of cubes to orbit and thread ===
     // L-shaped building
     meshes.push(primitives::cube(Point3::new(-15.0, 2.5, -20.0), 5.0, gray));
     meshes.push(primitives::cube(Point3::new(-15.0, 7.5, -20.0), 5.0, dark_gray));
     meshes.push(primitives::cube(Point3::new(-10.0, 2.5, -20.0), 5.0, gray));
-    // Gap between building sections — fly through!
+    // Gap between building sections, fly through!
     meshes.push(primitives::cube(Point3::new(-15.0, 2.5, -25.0), 5.0, dark_gray));
     meshes.extend(primitives::gate(Point3::new(-12.5, 0.0, -22.5), 90.0, 3.0, 4.0, green));
 
-    // === RAMP SECTION — matty flips and proximity ===
+    // === RAMP SECTION: matty flips and proximity ===
     meshes.push(primitives::ramp(Point3::new(15.0, 0.0, -15.0), 0.0, 6.0, 8.0, 4.0, yellow));
     meshes.push(primitives::ramp(Point3::new(15.0, 0.0, -30.0), 180.0, 6.0, 8.0, 4.0, yellow));
     // Gate between the ramps
     meshes.extend(primitives::gate(Point3::new(15.0, 0.0, -22.5), 0.0, 3.0, 3.0, orange));
 
-    // === SPLIT-S TOWERS — twin towers with a gap ===
+    // === SPLIT-S TOWERS: twin towers with a gap ===
     meshes.push(primitives::pillar(Point3::new(-8.0, 0.0, -40.0), 0.8, 12.0, purple));
     meshes.push(primitives::pillar(Point3::new( 8.0, 0.0, -40.0), 0.8, 12.0, purple));
-    // Bridge between towers — fly under or over
+    // Bridge between towers, fly under or over
     meshes.push(primitives::wall(Point3::new(0.0, 8.0, -40.0), 0.0, 16.0, 1.5, 0.5, purple));
     // Gate under the bridge
     meshes.extend(primitives::gate(Point3::new(0.0, 0.0, -40.0), 0.0, 4.0, 3.0, green));
 
-    // === SLALOM PILLARS — weave through at speed ===
+    // === SLALOM PILLARS: weave through at speed ===
     for i in 0..6 {
         let z = -50.0 - i as f32 * 6.0;
         let x = if i % 2 == 0 { -3.0 } else { 3.0 };
@@ -79,7 +79,7 @@ pub fn test_course() -> Scene {
     // Gate at the end of the slalom
     meshes.extend(primitives::gate(Point3::new(0.0, 0.0, -86.0), 0.0, 3.0, 2.5, yellow));
 
-    // === BANDO (abandoned building) — orbit and explore ===
+    // === BANDO (abandoned building): orbit and explore ===
     let bx = 25.0;
     let bz = -45.0;
     // Walls with window gaps
@@ -100,7 +100,7 @@ pub fn test_course() -> Scene {
     meshes.push(primitives::pillar(Point3::new(-20.0, 0.0, -10.0), 0.7, 9.0, cyan));
     meshes.push(primitives::cube(Point3::new(-25.0, 3.0, -35.0), 6.0, Color::new(90, 90, 90)));
 
-    // High-altitude gate on pillars — sends you up
+    // High-altitude gate on pillars that sends you up
     meshes.push(primitives::pillar(Point3::new(-2.0, 0.0, -6.0), 0.3, 8.0, white));
     meshes.push(primitives::pillar(Point3::new( 2.0, 0.0, -6.0), 0.3, 8.0, white));
     meshes.extend(primitives::gate(Point3::new(0.0, 8.0, -6.0), 0.0, 3.0, 2.0, white));

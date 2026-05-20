@@ -296,7 +296,7 @@ fn handle_axis_mapping_input(app: &mut App) {
         app.axis_map_listening = true;
     }
 
-    // I key for invert (when not used for navigation — use 'v' instead)
+    // I key for invert (when not used for navigation; use 'v' instead)
     if app.input.was_pressed(KeyCode::Char('v')) {
         if let Some(ref mut gp) = app.gamepad {
             let a = gp.mapping.get_mut(app.axis_map_selection);

@@ -14,7 +14,7 @@ pub fn render_menu(fb: &mut Framebuffer, selection: usize, options: &[MenuOption
 
     // Scale to fit: widest content must fit in framebuffer width
     // "  RANDOM COURSE" = 15 chars is the widest menu item
-    // Title "FPV SIM" = 7 chars at title_scale = scale+1
+    // Title "FLIGHTTY" = 8 chars at title_scale = scale+1
     let max_chars = 17; // widest line including prefix
     let scale: u32 = ((w as u32 * 36 / 100) / (max_chars * 8)).clamp(1, 3);
     let title_scale = scale;
@@ -22,8 +22,8 @@ pub fn render_menu(fb: &mut Framebuffer, selection: usize, options: &[MenuOption
     let title_char_w = 8 * title_scale as i32;
     let line_h = 8 * scale as i32 + 4;
 
-    // Title: "FPV SIM"
-    let title = "FPV SIM";
+    // Title: "FLIGHTTY"
+    let title = "FLIGHTTY";
     let title_px = title.len() as i32 * title_char_w;
     let title_x = (w - title_px) / 2;
     let title_y = h / 8;
@@ -35,7 +35,7 @@ pub fn render_menu(fb: &mut Framebuffer, selection: usize, options: &[MenuOption
     let sub_y = title_y + title_scale as i32 * 9;
     font::draw_string(fb, sub, (w - sub_px) / 2, sub_y, Color::new(80, 80, 110), None, scale);
 
-    // Menu options — vertically centered in remaining space
+    // Menu options, vertically centered in remaining space
     let menu_height = options.len() as i32 * line_h;
     let menu_start = (sub_y + scale as i32 * 12 + h - menu_height) / 2;
 
